@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes API - Grid Dynamics</title>
+  <meta name="description" content="Production-grade Notes API frontend with modular architecture">
+  <link rel="icon" type="image/svg+xml" href="/dist/images/GDYN.svg">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <img src="/dist/images/GDYN.svg" alt="Grid Dynamics" class="logo" width="44" height="44">
+        <div>
+          <h1 class="title">Notes API</h1>
+          <p class="subtitle">Production Grade Structure</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Create Note Section -->
+      <section class="card">
+        <h2 class="sectionTitle">Create Note</h2>
+        <form id="createForm" class="form">
+          <label class="label">
+            <span>Title</span>
+            <input 
+              id="title" 
+              class="input" 
+              type="text" 
+              maxlength="200" 
+              required 
+              placeholder="Enter note title..."
+              aria-describedby="title-hint"
+            >
+            <span id="title-hint" class="hint">Maximum 200 characters</span>
+          </label>
+          
+          <label class="label">
+            <span>Content</span>
+            <textarea 
+              id="content" 
+              class="textarea" 
+              maxlength="10000" 
+              required 
+              placeholder="Enter note content..."
+              aria-describedby="content-hint"
+            ></textarea>
+            <span id="content-hint" class="hint">Maximum 10,000 characters</span>
+          </label>
+          
+          <div class="row between">
+            <button type="submit" class="button">Create Note</button>
+            <button type="button" id="refreshBtn" class="button secondary">
+              <span class="sr-only">Refresh notes list</span>
+              Refresh
+            </button>
+          </div>
+        </form>
+        
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <!-- Notes List Section -->
+      <section class="card">
+        <h2 class="sectionTitle">Notes</h2>
+        <ul id="notesList" class="list" role="list" aria-label="Notes list">
+          <!-- Notes will be dynamically inserted here -->
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <!-- Scripts and styles will be injected by webpack -->
+</body>
+</html>

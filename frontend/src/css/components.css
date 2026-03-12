@@ -1,0 +1,311 @@
+/**
+ * Component-specific styles
+ */
+
+/* Typography components */
+.sectionTitle {
+  margin: 0 0 var(--spacing-md);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-semibold);
+}
+
+.hint {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Form components */
+.form {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.label {
+  display: grid;
+  gap: 6px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 10px var(--spacing-md);
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  outline: none;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: rgba(96, 165, 250, 0.65);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+.input:disabled,
+.textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.textarea {
+  min-height: 110px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* Button components */
+.button {
+  border: 1px solid var(--color-border);
+  background: linear-gradient(180deg, rgba(96, 165, 250, 0.22), rgba(96, 165, 250, 0.10));
+  color: var(--color-text);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+.button:hover:not(:disabled) {
+  border-color: rgba(96, 165, 250, 0.55);
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button.secondary {
+  background: transparent;
+}
+
+.button.danger {
+  color: var(--color-danger);
+  background: linear-gradient(180deg, rgba(255, 107, 107, 0.22), rgba(255, 107, 107, 0.10));
+}
+
+.button.danger:hover:not(:disabled) {
+  border-color: rgba(255, 107, 107, 0.55);
+}
+
+.button.small {
+  padding: 6px 10px;
+  font-size: var(--font-size-sm);
+  border-radius: 10px;
+}
+
+/* Link components */
+.link {
+  color: var(--color-primary);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.link:hover {
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.link:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+/* Status components */
+.status {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+  padding: var(--spacing-xs) 0;
+}
+
+.status.danger {
+  color: var(--color-danger);
+}
+
+.status.success {
+  color: var(--color-success);
+}
+
+.status.warning {
+  color: var(--color-warning);
+}
+
+/* List components */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.noteItem {
+  list-style: none;
+}
+
+/* Note components */
+.note {
+  display: block;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color var(--transition-fast);
+}
+
+.note:hover {
+  border-color: rgba(110, 231, 255, 0.35);
+}
+
+.noteSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  cursor: pointer;
+  user-select: none;
+}
+
+.noteSummary::-webkit-details-marker {
+  display: none;
+}
+
+.noteSummary::marker {
+  content: "";
+}
+
+.noteSummary:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-focus-ring);
+}
+
+.noteBody {
+  padding: 0 var(--spacing-md) var(--spacing-md);
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.noteDivider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 0 var(--spacing-md) var(--spacing-sm);
+}
+
+.noteActions {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+}
+
+.noteBtn {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 6px 10px;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  transition: border-color var(--transition-fast);
+}
+
+.noteBtn:hover:not(:disabled) {
+  border-color: rgba(110, 231, 255, 0.45);
+}
+
+.noteBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
+}
+
+.noteBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.noteBtn.danger:hover:not(:disabled) {
+  border-color: rgba(255, 107, 107, 0.7);
+}
+
+.noteTitle {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+}
+
+.noteMeta {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.noteContent {
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+  font-size: var(--font-size-base);
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  border-top-color: var(--color-primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Focus management */
+.focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Error states */
+.error {
+  border-color: var(--color-danger) !important;
+}
+
+.error-message {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-xs);
+}

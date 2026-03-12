@@ -1,0 +1,160 @@
+## Simple Notes API (FastAPI + Postgres + Docker)
+
+Production-grade REST API for creating, reading, updating, and deleting notes. Features modular architecture, comprehensive validation, database migrations, and a modern frontend.
+
+### Architecture
+
+**Backend (FastAPI)**
+- Layered architecture: API → Service → CRUD → Database
+- Pydantic validation with comprehensive error handling
+- SQLAlchemy with Alembic migrations
+- Middleware for logging and exception handling
+- Health checks and startup verification
+- Comprehensive test suite
+
+**Frontend (Vanilla JS + Webpack)**
+- Modular ES6 architecture with clean separation of concerns
+- Organized CSS with themes, layout, and component styles
+- Build optimization with webpack (minification, code splitting)
+- Nginx from Docker Hub for static hosting
+- Grid Dynamics branding and responsive design
+
+### Quick Start with Docker
+
+1. **Build the frontend:**
+```bash
+cd frontend
+npm install
+npm run build
+cd ..
+```
+
+2. **Start the application:**
+```bash
+docker-compose up
+```
+
+This starts:
+- `db`: PostgreSQL database
+- `api`: FastAPI backend on http://localhost:8000
+- `frontend`: Nginx static site on http://localhost:8080
+
+### Development Workflow
+
+**Frontend Development:**
+```bash
+# Option 1: Rebuild and restart (for small changes)
+cd frontend
+npm run build
+cd ..
+docker-compose restart frontend
+
+# Option 2: Use webpack dev server (for active development)
+docker-compose up db api  # Start backend only
+cd frontend
+npm run dev  # Serves at http://localhost:3000 with hot reload
+```
+
+**Backend Development:**
+```bash
+# Run locally without Docker
+export DATABASE_URL="postgresql+psycopg2://notes_user:notes_password@localhost:55432/notes_db"
+docker-compose up db  # Start only PostgreSQL
+cd backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+### API Endpoints
+
+- `GET /notes` - List all notes
+- `POST /notes` - Create a new note
+- `GET /notes/{note_id}` - Get a specific note
+- `PUT /notes/{note_id}` - Replace a note (full update)
+- `PATCH /notes/{note_id}` - Update a note (partial update)
+- `DELETE /notes/{note_id}` - Delete a note
+- `GET /health` - Health check endpoint
+
+### Example Usage
+
+```bash
+# Create a note
+curl -X POST "http://localhost:8000/notes" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"My First Note","content":"This is the content of my note."}'
+
+# Get all notes
+curl "http://localhost:8000/notes"
+
+# Update a note
+curl -X PATCH "http://localhost:8000/notes/1" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Updated Title"}'
+```
+
+### Frontend Features
+
+- **Modern UI**: Clean, responsive design with Grid Dynamics branding
+- **Real-time Updates**: Automatic refresh and status updates
+- **Form Validation**: Client-side validation with error messages
+- **Accessibility**: ARIA labels, keyboard navigation, screen reader support
+- **Performance**: Debounced inputs, efficient DOM updates, caching
+- **Error Handling**: Comprehensive error handling with user-friendly messages
+
+### Database Migrations
+
+The backend uses Alembic for database migrations:
+
+```bash
+# Create a new migration
+cd backend
+alembic revision --autogenerate -m "Description of changes"
+
+# Apply migrations
+alembic upgrade head
+
+# View migration history
+alembic history
+```
+
+### Testing
+
+```bash
+# Backend tests
+cd backend
+pytest
+
+# Frontend linting
+cd frontend
+npm run lint
+npm run format
+```
+
+### Environment Configuration
+
+Create a `.env` file in the `config/` directory:
+
+```env
+POSTGRES_USER=notes_user
+POSTGRES_PASSWORD=notes_password
+POSTGRES_DB=notes_db
+DATABASE_URL=postgresql+psycopg2://notes_user:notes_password@db:5432/notes_db
+```
+
+You can copy from the example file:
+```bash
+cp config/.env.example config/.env
+# Then edit config/.env with your values
+```
+
+### Production Deployment
+
+The application is production-ready with:
+- Optimized Docker images
+- Nginx with gzip compression and caching headers
+- Database connection pooling
+- Comprehensive logging and monitoring
+- Security headers and CORS configuration
+- Minified and bundled frontend assets
