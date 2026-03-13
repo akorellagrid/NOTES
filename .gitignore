@@ -36,6 +36,9 @@ config/.env
 *.sqlite3
 test.db
 
+# Kiro IDE files
+.kiro/
+
 # IDE
 .vscode/
 .idea/
