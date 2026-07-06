@@ -93,3 +93,16 @@ backend/alembic/versions/*.py
 *.tmp
 *.temp
 .cache/
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+infra/modules/monitoring/lambda/*.zip
