@@ -47,7 +47,7 @@ docker-compose up
 This starts:
 - `db`: PostgreSQL database
 - `api`: FastAPI backend on http://localhost:8000
-- `frontend`: Nginx static site on http://localhost:8080
+- `frontend`: Nginx static site on http://localhost:8081
 
 ### Development Workflow
 
@@ -191,3 +191,34 @@ The application is production-ready with:
 - Comprehensive logging and monitoring
 - Security headers and CORS configuration
 - Minified and bundled frontend assets
+
+### AWS Cloud Deployment (Capstone Part 4)
+
+`infra/` holds Terraform for a two-region AWS deployment (`ap-south-1`
+primary, `ap-southeast-1` secondary) satisfying the capstone's Part 4
+requirements:
+
+- **Horizontal scaling** — an Auto Scaling Group with a CPU
+  target-tracking policy, per tier, per region
+- **No public IPs on instances** — app/frontend EC2 instances sit in
+  private subnets; the only internet-facing components are the ALBs
+  and a NAT instance used purely for outbound egress
+- **Managed database, single instance, no replicas** — Amazon RDS for
+  PostgreSQL, Multi-AZ disabled, zero read replicas
+- **Multi-region application deployment** — independent VPC/ALB/ASG
+  stacks in both regions, connected over VPC peering, both reading
+  and writing the one RDS instance in the primary region
+
+A separate frontend tier (nginx reverse-proxying `/api/*` to the
+backend ALB) runs in both regions so there's an actual browsable app,
+not just the JSON API. A monitoring module adds a CloudWatch
+dashboard, alarms (unhealthy targets, RDS CPU/storage, NAT status), a
+cost Budget, and a Lambda-driven safety net that scales both ASGs to 0
+if spend crosses a small threshold.
+
+See:
+- [`docs/aws-architecture.md`](docs/aws-architecture.md) — the design
+  doc, including the Free Tier cost trade-offs and the deliberate
+  tension between "single DB instance" and "multi-region app"
+- [`infra/README.md`](infra/README.md) — Terraform layout and the
+  exact apply order (`primary` → push images → `secondary` → `global`)
